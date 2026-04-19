@@ -1,42 +1,58 @@
 ﻿Module ModHelper
     Public Function ValidasiInput(namaGrup As String,
                                    agensi As String,
-                                   member As String) As String
-        If String.IsNullOrWhiteSpace(namaGrup) Then
-            Return "Nama Grup tidak boleh kosong."
-        End If
-        If String.IsNullOrWhiteSpace(agensi) Then
-            Return "Nama Agensi tidak boleh kosong."
-        End If
+                                   member As String,
+                                   tahun As String) As String
+        If String.IsNullOrWhiteSpace(namaGrup) Then Return "Nama Grup tidak boleh kosong."
+        If String.IsNullOrWhiteSpace(agensi) Then Return "Agensi tidak boleh kosong."
 
         Dim jml As Integer
         If String.IsNullOrWhiteSpace(member) OrElse Not Integer.TryParse(member, jml) Then
             Return "Jumlah Member harus berupa angka."
         End If
-        If jml <= 0 OrElse jml > 100 Then
-            Return "Jumlah Member harus antara 1 sampai 100."
+        If jml <= 0 OrElse jml > 100 Then Return "Jumlah Member harus antara 1 sampai 100."
+
+        Dim thn As Integer
+        If String.IsNullOrWhiteSpace(tahun) OrElse Not Integer.TryParse(tahun, thn) Then
+            Return "Tahun Debut harus berupa angka."
         End If
+        If thn < 1990 OrElse thn > 2030 Then Return "Tahun Debut harus antara 1990 sampai 2030."
 
         Return String.Empty
     End Function
+
+    Public Function ValidasiInputAgensi(nama As String,
+                                         negara As String,
+                                         tahun As String) As String
+        If String.IsNullOrWhiteSpace(nama) Then Return "Nama Agensi tidak boleh kosong."
+        If String.IsNullOrWhiteSpace(negara) Then Return "Negara tidak boleh kosong."
+
+        Dim thn As Integer
+        If String.IsNullOrWhiteSpace(tahun) OrElse Not Integer.TryParse(tahun, thn) Then
+            Return "Tahun Berdiri harus berupa angka."
+        End If
+        If thn < 1950 OrElse thn > 2030 Then Return "Tahun Berdiri harus antara 1950 sampai 2030."
+
+        Return String.Empty
+    End Function
+
     Public Function SanitasiInput(nilai As String) As String
         If String.IsNullOrEmpty(nilai) Then Return String.Empty
         Return nilai.Trim().Replace("'", "''")
     End Function
+
     Public Function Konfirmasi(pesan As String, judul As String) As Boolean
         Return MessageBox.Show(pesan, judul,
                                MessageBoxButtons.YesNo,
                                MessageBoxIcon.Question) = DialogResult.Yes
     End Function
+
     Public Sub TampilkanError(pesan As String)
-        MessageBox.Show(pesan, "Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error)
+        MessageBox.Show(pesan, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
     End Sub
+
     Public Sub TampilkanInfo(pesan As String)
-        MessageBox.Show(pesan, "Informasi",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information)
+        MessageBox.Show(pesan, "Informasi", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
 
 End Module

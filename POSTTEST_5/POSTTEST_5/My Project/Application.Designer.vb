@@ -28,7 +28,7 @@ Namespace My
 
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = frmKpopManagement
+            Me.MainForm = frmMain
         End Sub
     End Class
 End Namespace

@@ -23,14 +23,12 @@ Partial Class frmKpopManagement
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         txtNamaGrup = New TextBox()
-        txtAgensi = New TextBox()
         txtNegara = New TextBox()
         txtMember = New TextBox()
         txtLagu = New TextBox()
         txtSearch = New TextBox()
         cmbGenre = New ComboBox()
         cmbFilter = New ComboBox()
-        nudTahun = New NumericUpDown()
         btnTambah = New Button()
         btnUpdate = New Button()
         btnHapus = New Button()
@@ -40,6 +38,8 @@ Partial Class frmKpopManagement
         dgvGrup = New DataGridView()
         lblStatus = New Label()
         gbDataGrup = New GroupBox()
+        txtTahun = New TextBox()
+        cmbAgensi = New ComboBox()
         Label11 = New Label()
         Label10 = New Label()
         Label9 = New Label()
@@ -54,7 +54,7 @@ Partial Class frmKpopManagement
         Label1 = New Label()
         Label13 = New Label()
         Label12 = New Label()
-        CType(nudTahun, ComponentModel.ISupportInitialize).BeginInit()
+        btnKeAgensi = New Button()
         CType(dgvGrup, ComponentModel.ISupportInitialize).BeginInit()
         gbDataGrup.SuspendLayout()
         gbCari.SuspendLayout()
@@ -69,16 +69,6 @@ Partial Class frmKpopManagement
         txtNamaGrup.Name = "txtNamaGrup"
         txtNamaGrup.Size = New Size(159, 28)
         txtNamaGrup.TabIndex = 0
-        ' 
-        ' txtAgensi
-        ' 
-        txtAgensi.BackColor = Color.Gray
-        txtAgensi.Font = New Font("Lucida Sans", 10.2F)
-        txtAgensi.ForeColor = SystemColors.Control
-        txtAgensi.Location = New Point(175, 52)
-        txtAgensi.Name = "txtAgensi"
-        txtAgensi.Size = New Size(159, 28)
-        txtAgensi.TabIndex = 1
         ' 
         ' txtNegara
         ' 
@@ -144,20 +134,6 @@ Partial Class frmKpopManagement
         cmbFilter.Name = "cmbFilter"
         cmbFilter.Size = New Size(205, 27)
         cmbFilter.TabIndex = 7
-        ' 
-        ' nudTahun
-        ' 
-        nudTahun.BackColor = Color.Gray
-        nudTahun.Font = New Font("Lucida Sans", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        nudTahun.ForeColor = SystemColors.Control
-        nudTahun.InterceptArrowKeys = False
-        nudTahun.Location = New Point(10, 167)
-        nudTahun.Maximum = New Decimal(New Integer() {2030, 0, 0, 0})
-        nudTahun.Minimum = New Decimal(New Integer() {1990, 0, 0, 0})
-        nudTahun.Name = "nudTahun"
-        nudTahun.Size = New Size(159, 28)
-        nudTahun.TabIndex = 8
-        nudTahun.Value = New Decimal(New Integer() {1990, 0, 0, 0})
         ' 
         ' btnTambah
         ' 
@@ -229,7 +205,7 @@ Partial Class frmKpopManagement
         dgvGrup.ReadOnly = True
         dgvGrup.RowHeadersWidth = 51
         dgvGrup.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        dgvGrup.Size = New Size(1055, 285)
+        dgvGrup.Size = New Size(1100, 285)
         dgvGrup.TabIndex = 15
         ' 
         ' lblStatus
@@ -245,6 +221,8 @@ Partial Class frmKpopManagement
         ' 
         ' gbDataGrup
         ' 
+        gbDataGrup.Controls.Add(txtTahun)
+        gbDataGrup.Controls.Add(cmbAgensi)
         gbDataGrup.Controls.Add(Label11)
         gbDataGrup.Controls.Add(Label10)
         gbDataGrup.Controls.Add(Label9)
@@ -253,13 +231,11 @@ Partial Class frmKpopManagement
         gbDataGrup.Controls.Add(Label6)
         gbDataGrup.Controls.Add(Label5)
         gbDataGrup.Controls.Add(btnBersihkan)
-        gbDataGrup.Controls.Add(txtAgensi)
         gbDataGrup.Controls.Add(btnHapus)
         gbDataGrup.Controls.Add(cmbGenre)
         gbDataGrup.Controls.Add(btnUpdate)
         gbDataGrup.Controls.Add(txtNegara)
         gbDataGrup.Controls.Add(btnTambah)
-        gbDataGrup.Controls.Add(nudTahun)
         gbDataGrup.Controls.Add(txtMember)
         gbDataGrup.Controls.Add(txtLagu)
         gbDataGrup.Controls.Add(txtNamaGrup)
@@ -271,6 +247,29 @@ Partial Class frmKpopManagement
         gbDataGrup.TabIndex = 19
         gbDataGrup.TabStop = False
         gbDataGrup.Text = "Data Grup"
+        ' 
+        ' txtTahun
+        ' 
+        txtTahun.BackColor = Color.Gray
+        txtTahun.Font = New Font("Lucida Sans", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtTahun.ForeColor = SystemColors.Control
+        txtTahun.Location = New Point(10, 167)
+        txtTahun.Name = "txtTahun"
+        txtTahun.Size = New Size(159, 28)
+        txtTahun.TabIndex = 29
+        ' 
+        ' cmbAgensi
+        ' 
+        cmbAgensi.BackColor = Color.White
+        cmbAgensi.DropDownStyle = ComboBoxStyle.DropDownList
+        cmbAgensi.Font = New Font("Lucida Sans", 10.2F)
+        cmbAgensi.ForeColor = SystemColors.ControlText
+        cmbAgensi.FormattingEnabled = True
+        cmbAgensi.Items.AddRange(New Object() {"Pop", "R&B", "Hip-Hop", "Ballad", "Dance"})
+        cmbAgensi.Location = New Point(175, 53)
+        cmbAgensi.Name = "cmbAgensi"
+        cmbAgensi.Size = New Size(159, 27)
+        cmbAgensi.TabIndex = 28
         ' 
         ' Label11
         ' 
@@ -421,12 +420,25 @@ Partial Class frmKpopManagement
         Label12.TabIndex = 22
         Label12.Text = "Cari"
         ' 
+        ' btnKeAgensi
+        ' 
+        btnKeAgensi.BackColor = Color.Gray
+        btnKeAgensi.Font = New Font("Lucida Sans", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnKeAgensi.ForeColor = SystemColors.Control
+        btnKeAgensi.Location = New Point(609, 385)
+        btnKeAgensi.Name = "btnKeAgensi"
+        btnKeAgensi.Size = New Size(208, 29)
+        btnKeAgensi.TabIndex = 22
+        btnKeAgensi.Text = "Buka Form Agensi"
+        btnKeAgensi.UseVisualStyleBackColor = False
+        ' 
         ' frmKpopManagement
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.Gray
-        ClientSize = New Size(1077, 764)
+        ClientSize = New Size(1124, 764)
+        Controls.Add(btnKeAgensi)
         Controls.Add(gbCari)
         Controls.Add(Label4)
         Controls.Add(gbDataGrup)
@@ -434,8 +446,7 @@ Partial Class frmKpopManagement
         Controls.Add(dgvGrup)
         Name = "frmKpopManagement"
         StartPosition = FormStartPosition.CenterScreen
-        Text = "Sistem Manajemen Data Grup K-Pop"
-        CType(nudTahun, ComponentModel.ISupportInitialize).EndInit()
+        Text = "Form Grup"
         CType(dgvGrup, ComponentModel.ISupportInitialize).EndInit()
         gbDataGrup.ResumeLayout(False)
         gbDataGrup.PerformLayout()
@@ -446,14 +457,12 @@ Partial Class frmKpopManagement
     End Sub
 
     Friend WithEvents txtNamaGrup As TextBox
-    Friend WithEvents txtAgensi As TextBox
     Friend WithEvents txtNegara As TextBox
     Friend WithEvents txtMember As TextBox
     Friend WithEvents txtLagu As TextBox
     Friend WithEvents txtSearch As TextBox
     Friend WithEvents cmbGenre As ComboBox
     Friend WithEvents cmbFilter As ComboBox
-    Friend WithEvents nudTahun As NumericUpDown
     Friend WithEvents btnTambah As Button
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnHapus As Button
@@ -477,5 +486,8 @@ Partial Class frmKpopManagement
     Friend WithEvents lblTotalGrup As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents lblTotalMember As Label
+    Friend WithEvents cmbAgensi As ComboBox
+    Friend WithEvents btnKeAgensi As Button
+    Friend WithEvents txtTahun As TextBox
 
 End Class
